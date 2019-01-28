@@ -1,0 +1,1655 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{maikon-abati}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{import}\label{import}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{externals}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}\PY{p}{,} \PY{n}{SGDRegressor}\PY{p}{,} \PY{n}{Lasso}\PY{p}{,} \PY{n}{Ridge}\PY{p}{,} \PY{n}{ElasticNet}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{GradientBoostingRegressor}\PY{p}{,} \PY{n}{BaggingRegressor}\PY{p}{,} \PY{n}{RandomForestRegressor}\PY{p}{,} \PY{n}{ExtraTreesRegressor}\PY{p}{,} \PY{n}{AdaBoostRegressor}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{,} \PY{n}{cross\PYZus{}val\PYZus{}score}
+        \PY{k+kn}{import} \PY{n+nn}{pickle}
+        
+        \PY{k+kn}{import} \PY{n+nn}{lime}
+        \PY{k+kn}{import} \PY{n+nn}{lime}\PY{n+nn}{.}\PY{n+nn}{lime\PYZus{}tabular}
+        
+        \PY{k+kn}{from} \PY{n+nn}{yellowbrick}\PY{n+nn}{.}\PY{n+nn}{regressor} \PY{k}{import} \PY{n}{ResidualsPlot}
+        \PY{k+kn}{from} \PY{n+nn}{fancyimpute} \PY{k}{import} \PY{n}{SoftImpute}
+        
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \subsection{functions \& var}\label{functions-var}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{modelos} \PY{o}{=} \PY{p}{[}
+            \PY{n}{GradientBoostingRegressor}\PY{p}{,} \PY{n}{BaggingRegressor}\PY{p}{,} \PY{n}{RandomForestRegressor}\PY{p}{,} \PY{n}{ExtraTreesRegressor}\PY{p}{,} \PY{n}{AdaBoostRegressor}\PY{p}{,}
+            \PY{n}{SGDRegressor}\PY{p}{,} \PY{n}{Lasso}\PY{p}{,} \PY{n}{Ridge}\PY{p}{,} \PY{n}{ElasticNet}\PY{p}{,} \PY{n}{LinearRegression}\PY{p}{,}
+        \PY{p}{]}
+        
+        \PY{k}{def} \PY{n+nf}{fnc\PYZus{}Dummies}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{cat\PYZus{}feature} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{n}{include}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{object}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+                \PY{n}{df}\PY{p}{[}\PY{n}{cat\PYZus{}feature}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Categorical}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{cat\PYZus{}feature}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{codes}
+                \PY{n}{df}\PY{p}{[}\PY{n}{cat\PYZus{}feature}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{cat\PYZus{}feature}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{)}
+            \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{fnc\PYZus{}Imputer}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{n}{imp\PYZus{}cols} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}
+            \PY{n}{imputer} \PY{o}{=} \PY{n}{SoftImpute}\PY{p}{(}\PY{p}{)}
+            \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{imputer}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=} \PY{n}{imp\PYZus{}cols}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{datasets}\label{datasets}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} importando os indicadores}
+        \PY{n}{indicators} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Indicators.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} dataset de países da união européia}
+        \PY{n}{eu\PYZus{}countries} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{European Union}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Austria}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Belgium}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bulgaria}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Croatia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cyprus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Czech Republic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Denmark}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Estonia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Finland}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{France}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Germany}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greece}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hungary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ireland}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Italy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Latvia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lithuania}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Luxembourg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Malta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Netherlands}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Poland}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Portugal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Romania}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Slovakia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Slovenia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sweden}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{United Kingdom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} definindo apenas a base de indicadores da união européia}
+        \PY{n}{eu} \PY{o}{=} \PY{n}{indicators}\PY{p}{[}\PY{n}{indicators}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{eu\PYZus{}countries}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \subsection{Questão 1}\label{questuxe3o-1}
+
+Mostre graficamente a evolução da taxa de fertilidade e do Produto
+Interno Bruto na União Européia.
+
+    \paragraph{Resposta:}\label{resposta}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} GDP (current US\PYZdl{})}
+        \PY{c+c1}{\PYZsh{} https://data.worldbank.org/indicator/NY.GDP.MKTP.CD}
+        \PY{n}{pib\PYZus{}cod} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NY.GDP.MKTP.CD}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{pib\PYZus{}nome} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP (current US\PYZdl{})}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Fertility rate, total (births per woman)}
+        \PY{c+c1}{\PYZsh{} https://data.worldbank.org/indicator/SP.DYN.TFRT.IN}
+        \PY{n}{fertilidade\PYZus{}cod} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SP.DYN.TFRT.IN}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{fertilidade\PYZus{}nome} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fertility rate, total (births per woman)}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Filtro para UE}
+        \PY{n}{df\PYZus{}grafico} \PY{o}{=} \PY{n}{eu}\PY{p}{[}\PY{n}{eu}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{European Union}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Dados para gráfico}
+        \PY{n}{data1} \PY{o}{=} \PY{n}{df\PYZus{}grafico}\PY{p}{[}\PY{n}{df\PYZus{}grafico}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IndicatorCode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{pib\PYZus{}cod}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        \PY{n}{data1\PYZus{}year} \PY{o}{=} \PY{n}{df\PYZus{}grafico}\PY{p}{[}\PY{n}{df\PYZus{}grafico}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IndicatorCode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{pib\PYZus{}cod}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        
+        \PY{n}{data2} \PY{o}{=} \PY{n}{df\PYZus{}grafico}\PY{p}{[}\PY{n}{df\PYZus{}grafico}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IndicatorCode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{fertilidade\PYZus{}cod}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        \PY{n}{data2\PYZus{}year} \PY{o}{=} \PY{n}{df\PYZus{}grafico}\PY{p}{[}\PY{n}{df\PYZus{}grafico}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IndicatorCode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{fertilidade\PYZus{}cod}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tab:blue}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{n}{pib\PYZus{}nome}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{color}\PY{p}{)}
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data1\PYZus{}year}\PY{p}{,} \PY{n}{data1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{color}\PY{p}{)}
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{tick\PYZus{}params}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{labelcolor}\PY{o}{=}\PY{n}{color}\PY{p}{)}
+        
+        \PY{n}{ax2} \PY{o}{=} \PY{n}{ax1}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}  
+        \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tab:red}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{n}{fertilidade\PYZus{}nome}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{color}\PY{p}{)}  
+        \PY{n}{ax2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data2\PYZus{}year}\PY{p}{,} \PY{n}{data2}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{color}\PY{p}{)}
+        \PY{n}{ax2}\PY{o}{.}\PY{n}{tick\PYZus{}params}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{labelcolor}\PY{o}{=}\PY{n}{color}\PY{p}{)}
+        
+        \PY{n}{fig}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}  
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Questão 2}\label{questuxe3o-2}
+
+Podemos afirmar que existe uma correlação entre a taxa de fertilidade e
+do Produto Interno Bruto na União Européia? Explique.
+
+    \paragraph{Resposta:}\label{resposta}
+
+    \subsubsection{Sim, existe uma correlação, mas é negativa. A taxa de
+fertilidade da UE é inversamente proporcional ao PIB, ou seja, quanto
+maior é o PIB menor é a
+taxa.}\label{sim-existe-uma-correlauxe7uxe3o-mas-uxe9-negativa.-a-taxa-de-fertilidade-da-ue-uxe9-inversamente-proporcional-ao-pib-ou-seja-quanto-maior-uxe9-o-pib-menor-uxe9-a-taxa.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Anos com valores}
+        \PY{c+c1}{\PYZsh{} df\PYZus{}grafico[df\PYZus{}grafico[\PYZsq{}IndicatorCode\PYZsq{}].isin([fertilidade\PYZus{}cod,pib\PYZus{}cod])].groupby(\PYZsq{}Year\PYZsq{}).count()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df\PYZus{}lr} \PY{o}{=} \PY{n}{df\PYZus{}grafico}\PY{p}{[}\PY{n}{df\PYZus{}grafico}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mi}{2014}\PY{p}{]}
+        
+        \PY{n}{x} \PY{o}{=} \PY{n}{df\PYZus{}lr}\PY{p}{[}\PY{n}{df\PYZus{}lr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IndicatorCode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{fertilidade\PYZus{}cod}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        \PY{n}{y} \PY{o}{=} \PY{n}{df\PYZus{}lr}\PY{p}{[}\PY{n}{df\PYZus{}lr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IndicatorCode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{pib\PYZus{}cod}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        
+        \PY{n}{fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{fit\PYZus{}fn} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{fit}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{fertilidade\PYZus{}nome}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{14}\PY{p}{]}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{... vs }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{pib\PYZus{}nome}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{pib\PYZus{}nome}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{fertilidade\PYZus{}nome}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{fit\PYZus{}fn}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Correlação de Pearson: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Correlação de Pearson:  -0.7551417562144183
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Questão 3}\label{questuxe3o-3}
+
+Podemos afirmar com as informações das questões anteriores que \emph{"o
+crescimento do PIB levou a uma redução da taxa de fertilidade na União
+Européia"}?. Explique.
+
+    \paragraph{Resposta:}\label{resposta}
+
+    \subsubsection{Correlação não implica
+causa!}\label{correlauxe7uxe3o-nuxe3o-implica-causa}
+
+\subsubsection{Pouco provável, não podemos concluir que a resposta para
+a redução é só o PIB. Precisamos utilizar mais variáveis para tentar
+responder esse evento de redução, pois ele é complexo e sabemos que
+existem muitas variáveis envolvidas. Seria interessante utilizar modelos
+de machine learning ou deep learning para tentar responder esse evento
+com mais
+precisão.}\label{pouco-provuxe1vel-nuxe3o-podemos-concluir-que-a-resposta-para-a-reduuxe7uxe3o-uxe9-suxf3-o-pib.-precisamos-utilizar-mais-variuxe1veis-para-tentar-responder-esse-evento-de-reduuxe7uxe3o-pois-ele-uxe9-complexo-e-sabemos-que-existem-muitas-variuxe1veis-envolvidas.-seria-interessante-utilizar-modelos-de-machine-learning-ou-deep-learning-para-tentar-responder-esse-evento-com-mais-precisuxe3o.}
+
+    \subsection{Questão 4}\label{questuxe3o-4}
+
+Consumo, segundo
+\href{https://en.wikipedia.org/wiki/John_Maynard_Keynes}{Keynes}
+(economista inglês), é uma função linear de um componente
+
+autônomo invariável que é independente da renda disponível (\emph{a}) e
+da proporção da renda alocada para consumo (\emph{b}) multiplicada pela
+renda (\emph{Y}), conforme abaixo:
+
+\[C = a + b * Y\]
+
+O parâmetro \emph{b} é conhecido como a propensão marginal a consumir,
+ou seja, o crescimento no consumo decorrente de um aumento na renda
+disponível.
+
+Faça a regressão da equação acima por
+\texttt{Mínimos\ Quadrados\ Ordinários} utilizando \emph{Household final
+consumption expenditure (constant 2005 US\$)} como proxy para o consumo,
+o \emph{GDP at market prices (constant 2005 US\$)} como proxy para a
+renda disponível utilizando os dados de cada um dos países membros da
+União Européia. Podemos rejeitar a hipótese de que o parâmetro \emph{b}
+é igual a zero? Comente.
+
+    \paragraph{Resposta:}\label{resposta}
+
+    \subsubsection{Sim, podemos. O consumo de fato subiu durante o
+crescimento da
+renda.}\label{sim-podemos.-o-consumo-de-fato-subiu-durante-o-crescimento-da-renda.}
+
+\subsubsection{O modelo de regressão linear apresentou R² de 0.99, assim
+indicando forte relação entre as variáveis utilizadas. A distribuição de
+erros é uma curva normal e as variáveis apresentam relação linear, esses
+são pré-requisitos fundamentais para um modelo linear. Seguem as
+evidências:}\label{o-modelo-de-regressuxe3o-linear-apresentou-r-de-0.99-assim-indicando-forte-relauxe7uxe3o-entre-as-variuxe1veis-utilizadas.-a-distribuiuxe7uxe3o-de-erros-uxe9-uma-curva-normal-e-as-variuxe1veis-apresentam-relauxe7uxe3o-linear-esses-suxe3o-pruxe9-requisitos-fundamentais-para-um-modelo-linear.-seguem-as-eviduxeancias}
+
+    \paragraph{Preparando Dataset}\label{preparando-dataset}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Conversão do dataset}
+        \PY{n}{var\PYZus{}x} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Household final consumption expenditure (constant 2005 US\PYZdl{})}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{var\PYZus{}y} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP at market prices (constant 2005 US\PYZdl{})}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{df\PYZus{}mqo} \PY{o}{=} \PY{n}{eu}\PY{p}{[}\PY{p}{(}\PY{o}{\PYZti{}}\PY{n}{eu}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{European Union}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZam{}} \PY{n}{eu}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IndicatorName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{n}{var\PYZus{}x}\PY{p}{,}\PY{n}{var\PYZus{}y}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+        
+        \PY{n}{anos} \PY{o}{=} \PY{n}{df\PYZus{}mqo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+        \PY{n}{paises} \PY{o}{=} \PY{n}{df\PYZus{}mqo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+        \PY{n}{lista} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{anos} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{paises}\PY{p}{]}
+        
+        \PY{n}{df\PYZus{}mqo\PYZus{}v2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{var\PYZus{}x}\PY{p}{,}\PY{n}{var\PYZus{}y}\PY{p}{]}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float}\PY{p}{)}
+        
+        \PY{n}{df\PYZus{}mqo\PYZus{}v2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{p}{[}\PY{n}{ano} \PY{k}{for} \PY{n}{ano}\PY{p}{,}\PY{n}{pais} \PY{o+ow}{in} \PY{n}{lista}\PY{p}{]}\PY{p}{)}
+        \PY{n}{df\PYZus{}mqo\PYZus{}v2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{p}{[}\PY{n}{pais} \PY{k}{for} \PY{n}{ano}\PY{p}{,}\PY{n}{pais} \PY{o+ow}{in} \PY{n}{lista}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{df\PYZus{}mqo}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IndicatorName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{var\PYZus{}x}\PY{p}{:}
+                \PY{n}{df\PYZus{}mqo\PYZus{}v2}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{df\PYZus{}mqo\PYZus{}v2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df\PYZus{}mqo\PYZus{}v2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{var\PYZus{}x}\PY{p}{]} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{df\PYZus{}mqo\PYZus{}v2}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{df\PYZus{}mqo\PYZus{}v2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df\PYZus{}mqo\PYZus{}v2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{var\PYZus{}y}\PY{p}{]} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \paragraph{Modelo Linear - Resultados}\label{modelo-linear---resultados}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Faz cópia de dataset}
+        \PY{n}{df\PYZus{}mqo\PYZus{}v3} \PY{o}{=} \PY{n}{df\PYZus{}mqo\PYZus{}v2}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Converte variáveis categóricas}
+        \PY{n}{df\PYZus{}mqo\PYZus{}v3} \PY{o}{=} \PY{n}{fnc\PYZus{}Dummies}\PY{p}{(}\PY{n}{df}\PY{o}{=}\PY{n}{df\PYZus{}mqo\PYZus{}v3}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Variáveis para treino}
+        \PY{n}{feature\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{var\PYZus{}x}\PY{p}{]}
+        \PY{n}{target\PYZus{}name} \PY{o}{=} \PY{n}{var\PYZus{}y}
+        \PY{n}{X} \PY{o}{=} \PY{n}{df\PYZus{}mqo\PYZus{}v3}\PY{p}{[}\PY{n}{feature\PYZus{}names}\PY{p}{]}
+        \PY{n}{y} \PY{o}{=} \PY{n}{df\PYZus{}mqo\PYZus{}v3}\PY{p}{[}\PY{n}{target\PYZus{}name}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Separa dados para treino e teste}
+        \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Prepara modelo para gráfico}
+        \PY{n}{model} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+        \PY{n}{visualizer} \PY{o}{=} \PY{n}{ResidualsPlot}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+        \PY{n}{visualizer}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+        \PY{n}{visualizer}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+        \PY{n}{visualizer}\PY{o}{.}\PY{n}{poof}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Correlação}\label{correlauxe7uxe3o}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{x} \PY{o}{=} \PY{n}{df\PYZus{}mqo\PYZus{}v3}\PY{p}{[}\PY{n}{var\PYZus{}x}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        \PY{n}{y} \PY{o}{=} \PY{n}{df\PYZus{}mqo\PYZus{}v3}\PY{p}{[}\PY{n}{var\PYZus{}y}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        
+        \PY{n}{fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{fit\PYZus{}fn} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{fit}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Regressão linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{var\PYZus{}x}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{var\PYZus{}y}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{fit\PYZus{}fn}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Correlação de Pearson: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Correlação de Pearson:  0.997676685154029
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Questão 5}\label{questuxe3o-5}
+
+Utilizando todas variáveis disponíveis na base de dados, construa o
+melhor modelo para explicar a taxa de fertilidade com até 5 variáveis.
+
+    \paragraph{Resposta:}\label{resposta}
+
+    \subsubsection{Data preparation \& Missing
+Values}\label{data-preparation-missing-values}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Cópia de dataframe}
+         \PY{n}{df\PYZus{}new} \PY{o}{=} \PY{n}{eu}\PY{p}{[}\PY{p}{(}\PY{o}{\PYZti{}}\PY{n}{eu}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{European Union}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{Year}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Pivot table para Indicadores}
+         \PY{n}{df\PYZus{}new\PYZus{}v2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{n}{df\PYZus{}new}\PY{p}{,} \PY{n}{values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IndicatorName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}new\PYZus{}v2}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{column}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{value}\PY{o}{=}\PY{n}{df\PYZus{}new\PYZus{}v2}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{get\PYZus{}level\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{p}{)}
+         \PY{n}{df\PYZus{}new\PYZus{}v2}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{column}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{value}\PY{o}{=}\PY{n}{df\PYZus{}new\PYZus{}v2}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{get\PYZus{}level\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Converte variáveis categóricas}
+         \PY{n}{df\PYZus{}new\PYZus{}v2} \PY{o}{=} \PY{n}{fnc\PYZus{}Dummies}\PY{p}{(}\PY{n}{df}\PY{o}{=}\PY{n}{df\PYZus{}new\PYZus{}v2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Elimina features com menos de 30\PYZpc{} de dados}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df\PYZus{}new\PYZus{}v2}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{df\PYZus{}new\PYZus{}v3} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{n}{column} \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{df} \PY{k}{if} \PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{]}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lista de fatos excluídos:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Total excluído:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}new\PYZus{}v3}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{end}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+             \PY{k}{if} \PY{n}{c} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{df\PYZus{}new\PYZus{}v3}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{n}{end}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Missing Values}
+         \PY{n}{df\PYZus{}new\PYZus{}v3} \PY{o}{=} \PY{n}{fnc\PYZus{}Imputer}\PY{p}{(}\PY{n}{df\PYZus{}new\PYZus{}v2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Lista de fatos excluídos:
+
+ Total excluído: 49.0 \%
+
+ 2005 PPP conversion factor, GDP (LCU per international \$)
+ 2005 PPP conversion factor, private consumption (LCU per international \$)
+ Access to electricity (\% of population)
+ Access to electricity, rural (\% of rural population)
+ Access to electricity, urban (\% of urban population)
+ Access to non-solid fuel (\% of population)
+ Access to non-solid fuel, rural (\% of rural population)
+ Access to non-solid fuel, urban (\% of urban population)
+ Adequacy of social insurance programs (\% of total welfare of beneficiary households)
+ Adequacy of social protection and labor programs (\% of total welfare of beneficiary households)
+ Adequacy of social safety net programs (\% of total welfare of beneficiary households)
+ Adequacy of unemployment benefits and ALMP (\% of total welfare of beneficiary households)
+ Adjusted net savings, including particulate emission damage (\% of GNI)
+ Adjusted net savings, including particulate emission damage (current US\$)
+ Adjusted savings: particulate emission damage (\% of GNI)
+ Adjusted savings: particulate emission damage (current US\$)
+ Adult literacy rate, population 15+ years, both sexes (\%)
+ Adult literacy rate, population 15+ years, female (\%)
+ Adult literacy rate, population 15+ years, male (\%)
+ Agricultural irrigated land (\% of total agricultural land)
+ Agricultural methane emissions (\% of total)
+ Agricultural methane emissions (thousand metric tons of CO2 equivalent)
+ Agricultural nitrous oxide emissions (\% of total)
+ Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent)
+ All education staff compensation, primary (\% of total expenditure in primary public institutions)
+ All education staff compensation, secondary (\% of total expenditure in secondary public institutions)
+ All education staff compensation, tertiary (\% of total expenditure in tertiary public institutions)
+ All education staff compensation, total (\% of total expenditure in public institutions)
+ Annual freshwater withdrawals, agriculture (\% of total freshwater withdrawal)
+ Annual freshwater withdrawals, domestic (\% of total freshwater withdrawal)
+ Annual freshwater withdrawals, industry (\% of total freshwater withdrawal)
+ Annual freshwater withdrawals, total (\% of internal resources)
+ Annual freshwater withdrawals, total (billion cubic meters)
+ Annualized average growth rate in per capita real survey mean consumption or income, bottom 40\% of population (\%)
+ Annualized average growth rate in per capita real survey mean consumption or income, total population (\%)
+ Automated teller machines (ATMs) (per 100,000 adults)
+ Average grace period on new external debt commitments (years)
+ Average grace period on new external debt commitments, official (years)
+ Average grace period on new external debt commitments, private (years)
+ Average grant element on new external debt commitments (\%)
+ Average grant element on new external debt commitments, official (\%)
+ Average grant element on new external debt commitments, private (\%)
+ Average interest on new external debt commitments (\%)
+ Average interest on new external debt commitments, official (\%)
+ Average interest on new external debt commitments, private (\%)
+ Average maturity on new external debt commitments (years)
+ Average maturity on new external debt commitments, official (years)
+ Average maturity on new external debt commitments, private (years)
+ Average precipitation in depth (mm per year)
+ Average time to clear exports through customs (days)
+ Average working hours of children, study and work, ages 7-14 (hours per week)
+ Average working hours of children, study and work, female, ages 7-14 (hours per week)
+ Average working hours of children, study and work, male, ages 7-14 (hours per week)
+ Average working hours of children, working only, ages 7-14 (hours per week)
+ Average working hours of children, working only, female, ages 7-14 (hours per week)
+ Average working hours of children, working only, male, ages 7-14 (hours per week)
+ Bank capital to assets ratio (\%)
+ Bank liquid reserves to bank assets ratio (\%)
+ Battle-related deaths (number of people)
+ Benefits incidence in poorest quintile (\%) - All Labor Market
+ Benefits incidence in poorest quintile (\%) - All Social Assistance
+ Benefits incidence in poorest quintile (\%) - All Social Insurance
+ Benefits incidence in poorest quintile (\%) -All Social Protection and Labor
+ Bird species, threatened
+ Births attended by skilled health staff (\% of total)
+ Borrowers from commercial banks (per 1,000 adults)
+ Bribery incidence (\% of firms experiencing at least one bribe payment request)
+ Broad money (\% of GDP)
+ Broad money (current LCU)
+ Broad money growth (annual \%)
+ Broad money to total reserves ratio
+ Burden of customs procedure, WEF (1=extremely inefficient to 7=extremely efficient)
+ Business extent of disclosure index (0=less disclosure to 10=more disclosure)
+ Cash surplus/deficit (\% of GDP)
+ Cause of death, by communicable diseases and maternal, prenatal and nutrition conditions (\% of total)
+ Cause of death, by injury (\% of total)
+ Cause of death, by non-communicable diseases (\% of total)
+ Central government debt, total (\% of GDP)
+ Central government debt, total (current LCU)
+ Charges for the use of intellectual property, payments (BoP, current US\$)
+ Charges for the use of intellectual property, receipts (BoP, current US\$)
+ Child employment in agriculture (\% of economically active children ages 7-14)
+ Child employment in agriculture, female (\% of female economically active children ages 7-14)
+ Child employment in agriculture, male (\% of male economically active children ages 7-14)
+ Child employment in manufacturing (\% of economically active children ages 7-14)
+ Child employment in manufacturing, female (\% of female economically active children ages 7-14)
+ Child employment in manufacturing, male (\% of male economically active children ages 7-14)
+ Child employment in services (\% of economically active children ages 7-14)
+ Child employment in services, female (\% of female economically active children ages 7-14)
+ Child employment in services, male (\% of male economically active children ages 7-14)
+ Children in employment, female (\% of female children ages 7-14)
+ Children in employment, male (\% of male children ages 7-14)
+ Children in employment, self-employed (\% of children in employment, ages 7-14)
+ Children in employment, self-employed, female (\% of female children in employment, ages 7-14)
+ Children in employment, self-employed, male (\% of male children in employment, ages 7-14)
+ Children in employment, study and work (\% of children in employment, ages 7-14)
+ Children in employment, study and work, female (\% of female children in employment, ages 7-14)
+ Children in employment, study and work, male (\% of male children in employment, ages 7-14)
+ Children in employment, total (\% of children ages 7-14)
+ Children in employment, unpaid family workers (\% of children in employment, ages 7-14)
+ Children in employment, unpaid family workers, female (\% of female children in employment, ages 7-14)
+ Children in employment, unpaid family workers, male (\% of male children in employment, ages 7-14)
+ Children in employment, work only (\% of children in employment, ages 7-14)
+ Children in employment, work only, female (\% of female children in employment, ages 7-14)
+ Children in employment, work only, male (\% of male children in employment, ages 7-14)
+ Claims on central government (annual growth as \% of broad money)
+ Claims on central government, etc. (\% GDP)
+ Claims on other sectors of the domestic economy (\% of GDP)
+ Claims on other sectors of the domestic economy (annual growth as \% of broad money)
+ Claims on private sector (annual growth as \% of broad money)
+ Commercial bank branches (per 100,000 adults)
+ Commercial banks and other lending (PPG + PNG) (NFL, current US\$)
+ Commercial service exports (current US\$)
+ Commercial service imports (current US\$)
+ Commitments, IBRD (COM, current US\$)
+ Commitments, IDA (COM, current US\$)
+ Commitments, official creditors (COM, current US\$)
+ Commitments, private creditors (COM, current US\$)
+ Commitments, public and publicly guaranteed (COM, current US\$)
+ Communications, computer, etc. (\% of service exports, BoP)
+ Communications, computer, etc. (\% of service imports, BoP)
+ Community health workers (per 1,000 people)
+ Completeness of birth registration (\%)
+ Completeness of death registration with cause-of-death information (\%)
+ Completeness of infant death reporting (\% of reported infant deaths to estimated infant deaths)
+ Completeness of total death reporting (\% of reported total deaths to estimated total deaths)
+ Computer, communications and other services (\% of commercial service exports)
+ Computer, communications and other services (\% of commercial service imports)
+ Concessional debt (\% of total external debt)
+ Consumption of iodized salt (\% of households)
+ Container port traffic (TEU: 20 foot equivalent units)
+ Contraceptive prevalence (\% of women ages 15-49)
+ Cost of business start-up procedures (\% of GNI per capita)
+ Cost to export (US\$ per container)
+ Cost to import (US\$ per container)
+ Coverage (\%) - All Labor Market
+ Coverage (\%) - All Social Assistance
+ Coverage (\%) - All Social Insurance
+ Coverage (\%) -All Social Protection and Labor
+ Currency composition of PPG debt, Deutsche mark (\%)
+ Currency composition of PPG debt, Euro (\%)
+ Currency composition of PPG debt, French franc (\%)
+ Currency composition of PPG debt, Japanese yen (\%)
+ Currency composition of PPG debt, Multiple currencies (\%)
+ Currency composition of PPG debt, Pound sterling (\%)
+ Currency composition of PPG debt, SDR (\%)
+ Currency composition of PPG debt, Swiss franc (\%)
+ Currency composition of PPG debt, U.S. dollars (\%)
+ Currency composition of PPG debt, all other currencies (\%)
+ Current account balance (\% of GDP)
+ Current account balance (BoP, current US\$)
+ Current education expenditure, primary (\% of total expenditure in primary public institutions)
+ Current education expenditure, secondary (\% of total expenditure in secondary public institutions)
+ Current education expenditure, tertiary (\% of total expenditure in tertiary public institutions)
+ Current education expenditure, total (\% of total expenditure in public institutions)
+ Customs and other import duties (\% of tax revenue)
+ Customs and other import duties (current LCU)
+ Debt buyback (current US\$)
+ Debt forgiveness grants (current US\$)
+ Debt forgiveness or reduction (current US\$)
+ Debt service (PPG and IMF only, \% of exports of goods, services and primary income)
+ Debt service on external debt, long-term (TDS, current US\$)
+ Debt service on external debt, private nonguaranteed (PNG) (TDS, current US\$)
+ Debt service on external debt, public and publicly guaranteed (PPG) (TDS, current US\$)
+ Debt service on external debt, total (TDS, current US\$)
+ Debt stock reduction (current US\$)
+ Debt stock rescheduled (current US\$)
+ Delay in obtaining an electrical connection (days)
+ Depositors with commercial banks (per 1,000 adults)
+ Depth of credit information index (0=low to 8=high)
+ Diabetes prevalence (\% of population ages 20 to 79)
+ Diarrhea treatment (\% of children under 5 who received ORS packet)
+ Disaster risk reduction progress score (1-5 scale; 5=best)
+ Disbursements on external debt, long-term (DIS, current US\$)
+ Disbursements on external debt, long-term + IMF (DIS, current US\$)
+ Disbursements on external debt, private nonguaranteed (PNG) (DIS, current US\$)
+ Disbursements on external debt, public and publicly guaranteed (PPG) (DIS, current US\$)
+ Distance to frontier score (0=lowest performance to 100=frontier)
+ Documents to export (number)
+ Documents to import (number)
+ Domestic credit provided by financial sector (\% of GDP)
+ Domestic credit to private sector (\% of GDP)
+ Domestic credit to private sector by banks (\% of GDP)
+ Droughts, floods, extreme temperatures (\% of population, average 1990-2009)
+ EBRD, private nonguaranteed (NFL, current US\$)
+ Ease of doing business index (1=most business-friendly regulations)
+ Emigration rate of tertiary educated (\% of total tertiary educated population)
+ Energy related methane emissions (\% of total)
+ Exclusive breastfeeding (\% of children under 6 months)
+ Expenditure on education as \% of total government expenditure (\%)
+ Expenditure on primary as \% of government expenditure on education (\%)
+ Expenditure on secondary as \% of government expenditure on education (\%)
+ Expenditure on tertiary as \% of government expenditure on education (\%)
+ Export volume index (2000 = 100)
+ Exports of goods and services (BoP, current US\$)
+ Exports of goods, services and primary income (BoP, current US\$)
+ External debt stocks (\% of GNI)
+ External debt stocks (\% of exports of goods, services and primary income)
+ External debt stocks, concessional (DOD, current US\$)
+ External debt stocks, long-term (DOD, current US\$)
+ External debt stocks, long-term private sector (DOD, current US\$)
+ External debt stocks, long-term public sector (DOD, current US\$)
+ External debt stocks, private nonguaranteed (PNG) (DOD, current US\$)
+ External debt stocks, public and publicly guaranteed (PPG) (DOD, current US\$)
+ External debt stocks, short-term (DOD, current US\$)
+ External debt stocks, total (DOD, current US\$)
+ External debt stocks, variable rate (DOD, current US\$)
+ External resources for health (\% of total expenditure on health)
+ Fertilizer consumption (\% of fertilizer production)
+ Fertilizer consumption (kilograms per hectare of arable land)
+ Firms competing against unregistered firms (\% of firms)
+ Firms expected to give gifts in meetings with tax officials (\% of firms)
+ Firms formally registered when operations started (\% of firms)
+ Firms offering formal training (\% of firms)
+ Firms that do not report all sales for tax purposes (\% of firms)
+ Firms using banks to finance investment (\% of firms)
+ Firms using banks to finance working capital (\% of firms)
+ Firms with female participation in ownership (\% of firms)
+ Firms with female top manager (\% of firms)
+ Fish species, threatened
+ Fixed broadband subscriptions
+ Fixed broadband subscriptions (per 100 people)
+ Foreign direct investment, net (BoP, current US\$)
+ Foreign direct investment, net outflows (\% of GDP)
+ GEF benefits index for biodiversity (0 = no biodiversity potential to 100 = maximum)
+ GINI index (World Bank estimate)
+ Goods exports (BoP, current US\$)
+ Goods imports (BoP, current US\$)
+ Government expenditure per primary student as \% of GDP per capita (\%)
+ Government expenditure per secondary student as \% of GDP per capita (\%)
+ Government expenditure per tertiary student as \% of GDP per capita (\%)
+ Grants and other revenue (\% of revenue)
+ Grants and other revenue (current LCU)
+ Grants, excluding technical cooperation (BoP, current US\$)
+ Gross fixed capital formation, private sector (\% of GDP)
+ Gross fixed capital formation, private sector (current LCU)
+ HFC gas emissions (thousand metric tons of CO2 equivalent)
+ IBRD loans and IDA credits (DOD, current US\$)
+ ICT goods exports (\% of total goods exports)
+ ICT goods imports (\% total goods imports)
+ ICT service exports (\% of service exports, BoP)
+ ICT service exports (BoP, current US\$)
+ IDA grants (current US\$)
+ IFC, private nonguaranteed (NFL, current US\$)
+ IMF charges (INT, current US\$)
+ IMF purchases (DIS, current US\$)
+ IMF repurchases (AMT, current US\$)
+ IMF repurchases and charges (TDS, current US\$)
+ Import volume index (2000 = 100)
+ Imports of goods and services (BoP, current US\$)
+ Imports of goods, services and primary income (BoP, current US\$)
+ Income share held by fourth 20\%
+ Income share held by highest 10\%
+ Income share held by highest 20\%
+ Income share held by lowest 10\%
+ Income share held by lowest 20\%
+ Income share held by second 20\%
+ Income share held by third 20\%
+ Industrial nitrous oxide emissions (thousand metric tons of CO2 equivalent)
+ Informal payments to public officials (\% of firms)
+ Insurance and financial services (\% of commercial service exports)
+ Insurance and financial services (\% of commercial service imports)
+ Insurance and financial services (\% of service exports, BoP)
+ Insurance and financial services (\% of service imports, BoP)
+ Interest arrears, long-term DOD (US\$)
+ Interest arrears, official creditors (current US\$)
+ Interest arrears, private creditors (current US\$)
+ Interest forgiven (current US\$)
+ Interest payments on external debt (\% of GNI)
+ Interest payments on external debt (\% of exports of goods, services and primary income)
+ Interest payments on external debt, long-term (INT, current US\$)
+ Interest payments on external debt, private nonguaranteed (PNG) (INT, current US\$)
+ Interest payments on external debt, public and publicly guaranteed (PPG) (INT, current US\$)
+ Interest payments on external debt, short-term (INT, current US\$)
+ Interest payments on external debt, total (INT, current US\$)
+ Interest rescheduled (capitalized) (current US\$)
+ Interest rescheduled, official (current US\$)
+ Interest rescheduled, private (current US\$)
+ Internally displaced persons (number, high estimate)
+ Internally displaced persons (number, low estimate)
+ International migrant stock (\% of population)
+ International migrant stock, total
+ International tourism, expenditures (\% of total imports)
+ International tourism, number of departures
+ International tourism, receipts (\% of total exports)
+ Internationally-recognized quality certification (\% of firms)
+ Investment in energy with private participation (current US\$)
+ Investment in telecoms with private participation (current US\$)
+ Investment in transport with private participation (current US\$)
+ Investment in water and sanitation with private participation (current US\$)
+ Labor tax and contributions (\% of commercial profits)
+ Land area where elevation is below 5 meters (\% of total land area)
+ Lead time to export, median case (days)
+ Lead time to import, median case (days)
+ Liner shipping connectivity index (maximum value in 2004 = 100)
+ Logistics performance index: Ability to track and trace consignments (1=low to 5=high)
+ Logistics performance index: Competence and quality of logistics services (1=low to 5=high)
+ Logistics performance index: Ease of arranging competitively priced shipments (1=low to 5=high)
+ Logistics performance index: Efficiency of customs clearance process (1=low to 5=high)
+ Logistics performance index: Frequency with which shipments reach consignee within scheduled or expected time (1=low to 5=high)
+ Logistics performance index: Overall (1=low to 5=high)
+ Logistics performance index: Quality of trade and transport-related infrastructure (1=low to 5=high)
+ Losses due to theft, robbery, vandalism, and arson (\% sales)
+ Low-birthweight babies (\% of births)
+ Lower secondary completion rate, female (\%)
+ Lower secondary completion rate, male (\%)
+ Mammal species, threatened
+ Maternal mortality ratio (national estimate, per 100,000 live births)
+ Merchandise exports to developing economies within region (\% of total merchandise exports)
+ Merchandise imports from developing economies within region (\% of total merchandise imports)
+ Methane emissions (kt of CO2 equivalent)
+ Methane emissions in energy sector (thousand metric tons of CO2 equivalent)
+ Methodology assessment of statistical capacity (scale 0 - 100)
+ Money (current LCU)
+ Money and quasi money (M2) (current LCU)
+ Money and quasi money (M2) as \% of GDP
+ Money and quasi money (M2) to total reserves ratio
+ Money and quasi money growth (annual \%)
+ Mortality rate, infant, female (per 1,000 live births)
+ Mortality rate, infant, male (per 1,000 live births)
+ Mortality rate, under-5, female (per 1,000 live births)
+ Mortality rate, under-5, male (per 1,000 live births)
+ Multilateral debt (\% of total external debt)
+ Multilateral debt service (\% of public and publicly guaranteed debt service)
+ Multilateral debt service (TDS, current US\$)
+ Net ODA received (\% of GNI)
+ Net ODA received (\% of central government expense)
+ Net ODA received (\% of gross capital formation)
+ Net ODA received (\% of imports of goods, services and primary income)
+ Net ODA received per capita (current US\$)
+ Net barter terms of trade index (2000 = 100)
+ Net bilateral aid flows from DAC donors, Australia (current US\$)
+ Net bilateral aid flows from DAC donors, Austria (current US\$)
+ Net bilateral aid flows from DAC donors, Belgium (current US\$)
+ Net bilateral aid flows from DAC donors, Canada (current US\$)
+ Net bilateral aid flows from DAC donors, Czech Republic (current US\$)
+ Net bilateral aid flows from DAC donors, Denmark (current US\$)
+ Net bilateral aid flows from DAC donors, European Union institutions (current US\$)
+ Net bilateral aid flows from DAC donors, Finland (current US\$)
+ Net bilateral aid flows from DAC donors, France (current US\$)
+ Net bilateral aid flows from DAC donors, Germany (current US\$)
+ Net bilateral aid flows from DAC donors, Greece (current US\$)
+ Net bilateral aid flows from DAC donors, Ireland (current US\$)
+ Net bilateral aid flows from DAC donors, Italy (current US\$)
+ Net bilateral aid flows from DAC donors, Japan (current US\$)
+ Net bilateral aid flows from DAC donors, Korea, Rep. (current US\$)
+ Net bilateral aid flows from DAC donors, Luxembourg (current US\$)
+ Net bilateral aid flows from DAC donors, Netherlands (current US\$)
+ Net bilateral aid flows from DAC donors, New Zealand (current US\$)
+ Net bilateral aid flows from DAC donors, Norway (current US\$)
+ Net bilateral aid flows from DAC donors, Poland (current US\$)
+ Net bilateral aid flows from DAC donors, Portugal (current US\$)
+ Net bilateral aid flows from DAC donors, Slovak Republic (current US\$)
+ Net bilateral aid flows from DAC donors, Slovenia (current US\$)
+ Net bilateral aid flows from DAC donors, Spain (current US\$)
+ Net bilateral aid flows from DAC donors, Sweden (current US\$)
+ Net bilateral aid flows from DAC donors, Switzerland (current US\$)
+ Net bilateral aid flows from DAC donors, Total (current US\$)
+ Net bilateral aid flows from DAC donors, United Kingdom (current US\$)
+ Net bilateral aid flows from DAC donors, United States (current US\$)
+ Net capital account (BoP, current US\$)
+ Net change in interest arrears (current US\$)
+ Net domestic credit (current LCU)
+ Net errors and omissions (BoP, current US\$)
+ Net financial account (BoP, current US\$)
+ Net financial flows, IBRD (NFL, current US\$)
+ Net financial flows, IDA (NFL, current US\$)
+ Net financial flows, IMF concessional (NFL, current US\$)
+ Net financial flows, IMF nonconcessional (NFL, current US\$)
+ Net financial flows, RDB concessional (NFL, current US\$)
+ Net financial flows, RDB nonconcessional (NFL, current US\$)
+ Net financial flows, bilateral (NFL, current US\$)
+ Net financial flows, multilateral (NFL, current US\$)
+ Net financial flows, others (NFL, current US\$)
+ Net flows on external debt, long-term (NFL, current US\$)
+ Net flows on external debt, private nonguaranteed (PNG) (NFL, current US\$)
+ Net flows on external debt, public and publicly guaranteed (PPG) (NFL, current US\$)
+ Net flows on external debt, short-term (NFL, current US\$)
+ Net flows on external debt, total (NFL, current US\$)
+ Net foreign assets (current LCU)
+ Net incurrence of liabilities, domestic (\% of GDP)
+ Net incurrence of liabilities, domestic (current LCU)
+ Net incurrence of liabilities, foreign (\% of GDP)
+ Net incurrence of liabilities, foreign (current LCU)
+ Net intake rate to Grade 1 of primary education, both sexes (\%)
+ Net intake rate to Grade 1 of primary education, female (\%)
+ Net intake rate to Grade 1 of primary education, male (\%)
+ Net migration
+ Net official aid received (constant 2012 US\$)
+ Net official aid received (current US\$)
+ Net official development assistance and official aid received (constant 2012 US\$)
+ Net official development assistance and official aid received (current US\$)
+ Net official development assistance received (constant 2012 US\$)
+ Net official development assistance received (current US\$)
+ Net official flows from UN agencies, IAEA (current US\$)
+ Net official flows from UN agencies, IFAD (current US\$)
+ Net official flows from UN agencies, UNAIDS (current US\$)
+ Net official flows from UN agencies, UNDP (current US\$)
+ Net official flows from UN agencies, UNFPA (current US\$)
+ Net official flows from UN agencies, UNHCR (current US\$)
+ Net official flows from UN agencies, UNICEF (current US\$)
+ Net official flows from UN agencies, UNTA (current US\$)
+ Net official flows from UN agencies, WFP (current US\$)
+ Net primary income (BoP, current US\$)
+ Net trade in goods (BoP, current US\$)
+ Net trade in goods and services (BoP, current US\$)
+ Net transfers on external debt, long-term (NTR, current US\$)
+ Net transfers on external debt, private nonguaranteed (PNG) (NTR, current US\$)
+ Net transfers on external debt, public and publicly guaranteed (PPG) (NTR, current US\$)
+ Net transfers on external debt, total (NTR, current US\$)
+ New business density (new registrations per 1,000 people ages 15-64)
+ New businesses registered (number)
+ Nitrous oxide emissions (thousand metric tons of CO2 equivalent)
+ Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent)
+ Nitrous oxide emissions in industrial and energy processes (\% of total nitrous oxide emissions)
+ Number of visits or required meetings with tax officials
+ Nurses and midwives (per 1,000 people)
+ Other greenhouse gas emissions, HFC, PFC and SF6 (thousand metric tons of CO2 equivalent)
+ Other taxes (\% of revenue)
+ Other taxes (current LCU)
+ Other taxes payable by businesses (\% of commercial profits)
+ Overall level of statistical capacity (scale 0 - 100)
+ PFC gas emissions (thousand metric tons of CO2 equivalent)
+ PM2.5 air pollution, mean annual exposure (micrograms per cubic meter)
+ PM2.5 air pollution, population exposed to levels exceeding WHO guideline value (\% of total)
+ PNG, bonds (AMT, current US\$)
+ PNG, bonds (DIS, current US\$)
+ PNG, bonds (DOD, current US\$)
+ PNG, bonds (INT, current US\$)
+ PNG, bonds (NFL, current US\$)
+ PNG, bonds (NTR, current US\$)
+ PNG, bonds (TDS, current US\$)
+ PNG, commercial banks and other creditors (AMT, current US\$)
+ PNG, commercial banks and other creditors (DIS, current US\$)
+ PNG, commercial banks and other creditors (DOD, current US\$)
+ PNG, commercial banks and other creditors (INT, current US\$)
+ PNG, commercial banks and other creditors (NFL, current US\$)
+ PNG, commercial banks and other creditors (NTR, current US\$)
+ PNG, commercial banks and other creditors (TDS, current US\$)
+ PPG, IBRD (AMT, current US\$)
+ PPG, IBRD (DIS, current US\$)
+ PPG, IBRD (DOD, current US\$)
+ PPG, IBRD (INT, current US\$)
+ PPG, IBRD (NTR, current US\$)
+ PPG, IBRD (TDS, current US\$)
+ PPG, IDA (AMT, current US\$)
+ PPG, IDA (DIS, current US\$)
+ PPG, IDA (DOD, current US\$)
+ PPG, IDA (INT, current US\$)
+ PPG, IDA (NTR, current US\$)
+ PPG, IDA (TDS, current US\$)
+ PPG, bilateral (AMT, current US\$)
+ PPG, bilateral (DIS, current US\$)
+ PPG, bilateral (DOD, current US\$)
+ PPG, bilateral (INT, current US\$)
+ PPG, bilateral (NTR, current US\$)
+ PPG, bilateral (TDS, current US\$)
+ PPG, bilateral concessional (AMT, current US\$)
+ PPG, bilateral concessional (DIS, current US\$)
+ PPG, bilateral concessional (DOD, current US\$)
+ PPG, bilateral concessional (INT, current US\$)
+ PPG, bilateral concessional (NFL, current US\$)
+ PPG, bilateral concessional (NTR, current US\$)
+ PPG, bilateral concessional (TDS, current US\$)
+ PPG, bonds (AMT, current US\$)
+ PPG, bonds (DIS, current US\$)
+ PPG, bonds (DOD, current US\$)
+ PPG, bonds (INT, current US\$)
+ PPG, bonds (NFL, current US\$)
+ PPG, bonds (NTR, current US\$)
+ PPG, bonds (TDS, current US\$)
+ PPG, commercial banks (AMT, current US\$)
+ PPG, commercial banks (DIS, current US\$)
+ PPG, commercial banks (DOD, current US\$)
+ PPG, commercial banks (INT, current US\$)
+ PPG, commercial banks (NFL, current US\$)
+ PPG, commercial banks (NTR, current US\$)
+ PPG, commercial banks (TDS, current US\$)
+ PPG, multilateral (AMT, current US\$)
+ PPG, multilateral (DIS, current US\$)
+ PPG, multilateral (DOD, current US\$)
+ PPG, multilateral (INT, current US\$)
+ PPG, multilateral (NTR, current US\$)
+ PPG, multilateral concessional (AMT, current US\$)
+ PPG, multilateral concessional (DIS, current US\$)
+ PPG, multilateral concessional (DOD, current US\$)
+ PPG, multilateral concessional (INT, current US\$)
+ PPG, multilateral concessional (NFL, current US\$)
+ PPG, multilateral concessional (NTR, current US\$)
+ PPG, multilateral concessional (TDS, current US\$)
+ PPG, official creditors (AMT, current US\$)
+ PPG, official creditors (DIS, current US\$)
+ PPG, official creditors (DOD, current US\$)
+ PPG, official creditors (INT, current US\$)
+ PPG, official creditors (NFL, current US\$)
+ PPG, official creditors (NTR, current US\$)
+ PPG, official creditors (TDS, current US\$)
+ PPG, other private creditors (AMT, current US\$)
+ PPG, other private creditors (DIS, current US\$)
+ PPG, other private creditors (DOD, current US\$)
+ PPG, other private creditors (INT, current US\$)
+ PPG, other private creditors (NFL, current US\$)
+ PPG, other private creditors (NTR, current US\$)
+ PPG, other private creditors (TDS, current US\$)
+ PPG, private creditors (AMT, current US\$)
+ PPG, private creditors (DIS, current US\$)
+ PPG, private creditors (DOD, current US\$)
+ PPG, private creditors (INT, current US\$)
+ PPG, private creditors (NFL, current US\$)
+ PPG, private creditors (NTR, current US\$)
+ PPG, private creditors (TDS, current US\$)
+ Percentage of enrolment in secondary education in private institutions (\%)
+ Percentage of female teachers in primary education who are trained, female (\%)
+ Percentage of male teachers in primary education who are trained, male (\%)
+ Percentage of teachers in primary education who are trained, both sexes (\%)
+ Periodicity and timeliness assessment of statistical capacity (scale 0 - 100)
+ Personal transfers, receipts (BoP, current US\$)
+ Plant species (higher), threatened
+ Point-of-sale terminals (per 100,000 adults)
+ Population living in areas where elevation is below 5 meters (\% of total population)
+ Portfolio Investment, net (BoP, current US\$)
+ Portfolio investment, bonds (PPG + PNG) (NFL, current US\$)
+ Poverty gap at \$1.90 a day (2011 PPP) (\%)
+ Poverty gap at \$3.10 a day (2011 PPP) (\%)
+ Poverty headcount ratio at \$1.90 a day (2011 PPP) (\% of population)
+ Poverty headcount ratio at \$3.10 a day (2011 PPP) (\% of population)
+ Poverty headcount ratio at national poverty lines (\% of population)
+ Power outages in firms in a typical month (number)
+ Pregnant women receiving prenatal care (\%)
+ Present value of external debt (\% of GNI)
+ Present value of external debt (\% of exports of goods, services and primary income)
+ Present value of external debt (current US\$)
+ Prevalence of HIV, female (\% ages 15-24)
+ Prevalence of HIV, male (\% ages 15-24)
+ Prevalence of HIV, total (\% of population ages 15-49)
+ Prevalence of overweight, weight for height (\% of children under 5)
+ Prevalence of overweight, weight for height, female (\% of children under 5)
+ Prevalence of overweight, weight for height, male (\% of children under 5)
+ Prevalence of severe wasting, weight for height (\% of children under 5)
+ Prevalence of severe wasting, weight for height, female (\% of children under 5)
+ Prevalence of severe wasting, weight for height, male (\% of children under 5)
+ Prevalence of stunting, height for age (\% of children under 5)
+ Prevalence of stunting, height for age, female (\% of children under 5)
+ Prevalence of stunting, height for age, male (\% of children under 5)
+ Prevalence of underweight, weight for age (\% of children under 5)
+ Prevalence of underweight, weight for age, female (\% of children under 5)
+ Prevalence of underweight, weight for age, male (\% of children under 5)
+ Prevalence of wasting, weight for height (\% of children under 5)
+ Prevalence of wasting, weight for height, female (\% of children under 5)
+ Prevalence of wasting, weight for height, male (\% of children under 5)
+ Primary income on FDI, payments (current US\$)
+ Primary income payments (BoP, current US\$)
+ Primary income receipts (BoP, current US\$)
+ Primary to secondary general education transition rate, female (\%)
+ Primary to secondary general education transition rate, male (\%)
+ Principal arrears, long-term DOD (US\$)
+ Principal arrears, official creditors (current US\$)
+ Principal arrears, private creditors (current US\$)
+ Principal forgiven (current US\$)
+ Principal repayments on external debt, long-term (AMT, current US\$)
+ Principal repayments on external debt, long-term + IMF (AMT, current US\$)
+ Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US\$)
+ Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US\$)
+ Principal rescheduled (current US\$)
+ Principal rescheduled, official (current US\$)
+ Principal rescheduled, private (current US\$)
+ Private credit bureau coverage (\% of adults)
+ Procedures to build a warehouse (number)
+ Procedures to register property (number)
+ Profit tax (\% of commercial profits)
+ Public and publicly guaranteed debt service (\% of GNI)
+ Public and publicly guaranteed debt service (\% of exports of goods, services and primary income)
+ Public credit registry coverage (\% of adults)
+ Pump price for diesel fuel (US\$ per liter)
+ Pump price for gasoline (US\$ per liter)
+ Quality of port infrastructure, WEF (1=extremely underdeveloped to 7=well developed and efficient by international standards)
+ Quasi money (current LCU)
+ Renewable internal freshwater resources per capita (cubic meters)
+ Renewable internal freshwater resources, total (billion cubic meters)
+ Researchers in R\&D (per million people)
+ Reserves and related items (BoP, current US\$)
+ Residual, debt stock-flow reconciliation (current US\$)
+ Revenue, excluding grants (\% of GDP)
+ SF6 gas emissions (thousand metric tons of CO2 equivalent)
+ Secondary income receipts (BoP, current US\$)
+ Secondary income, other sectors, payments (BoP, current US\$)
+ Secure Internet servers
+ Secure Internet servers (per 1 million people)
+ Service exports (BoP, current US\$)
+ Service imports (BoP, current US\$)
+ Share of youth not in education, employment, or training, female (\% of female youth population)
+ Share of youth not in education, employment, or training, male (\% of male youth population)
+ Share of youth not in education, employment, or training, total (\% of youth population)
+ Short-term debt (\% of exports of goods, services and primary income)
+ Short-term debt (\% of total external debt)
+ Short-term debt (\% of total reserves)
+ Smoking prevalence, females (\% of adults)
+ Smoking prevalence, males (\% of adults)
+ Source data assessment of statistical capacity (scale 0 - 100)
+ Start-up procedures to register a business (number)
+ Strength of legal rights index (0=weak to 12=strong)
+ Survey mean consumption or income per capita, bottom 40\% of population (2011 PPP \$ per day)
+ Survey mean consumption or income per capita, total population (2011 PPP \$ per day)
+ Survival rate to Grade 5 of primary education, both sexes (\%)
+ Survival rate to Grade 5 of primary education, female (\%)
+ Survival rate to Grade 5 of primary education, male (\%)
+ Survival rate to the last grade of primary education, both sexes (\%)
+ Survival rate to the last grade of primary education, female (\%)
+ Survival rate to the last grade of primary education, male (\%)
+ Tax payments (number)
+ Taxes on exports (\% of tax revenue)
+ Taxes on exports (current LCU)
+ Taxes on goods and services (\% of revenue)
+ Taxes on goods and services (\% value added of industry and services)
+ Taxes on international trade (\% of revenue)
+ Taxes on international trade (current LCU)
+ Technical cooperation grants (BoP, current US\$)
+ Technicians in R\&D (per million people)
+ Teenage mothers (\% of women ages 15-19 who have had children or are currently pregnant)
+ Time required to build a warehouse (days)
+ Time required to enforce a contract (days)
+ Time required to get electricity (days)
+ Time required to obtain an operating license (days)
+ Time required to register property (days)
+ Time required to start a business (days)
+ Time spent dealing with the requirements of government regulations (\% of senior management time)
+ Time to export (days)
+ Time to import (days)
+ Time to prepare and pay taxes (hours)
+ Time to resolve insolvency (years)
+ Total amount of debt rescheduled (current US\$)
+ Total change in external debt stocks (current US\$)
+ Total debt service (\% of GNI)
+ Total debt service (\% of exports of goods, services and primary income)
+ Total reserves (\% of total external debt)
+ Total reserves in months of imports
+ Total tax rate (\% of commercial profits)
+ Trade in services (\% of GDP)
+ Transport services (\% of commercial service exports)
+ Transport services (\% of commercial service imports)
+ Transport services (\% of service exports, BoP)
+ Transport services (\% of service imports, BoP)
+ Travel services (\% of commercial service exports)
+ Travel services (\% of commercial service imports)
+ Travel services (\% of service exports, BoP)
+ Travel services (\% of service imports, BoP)
+ Tuberculosis treatment success rate (\% of new cases)
+ Undisbursed external debt, official creditors (UND, current US\$)
+ Undisbursed external debt, private creditors (UND, current US\$)
+ Undisbursed external debt, total (UND, current US\$)
+ Unmet need for contraception (\% of married women ages 15-49)
+ Use of IMF credit (DOD, current US\$)
+ Value lost due to electrical outages (\% of sales)
+ Wanted fertility rate (births per woman)
+ Water productivity, total (constant 2005 US\$ GDP per cubic meter of total freshwater withdrawal)
+ Women's share of population ages 15+ living with HIV (\%)
+ Youth literacy rate, population 15-24 years, both sexes (\%)
+ Youth literacy rate, population 15-24 years, female (\%)
+ Youth literacy rate, population 15-24 years, gender parity index (GPI)
+ Youth literacy rate, population 15-24 years, male (\%)
+ [SoftImpute] Max Singular Value of X\_init = 449822759346263.437500
+[SoftImpute] Iter 1: observed MAE=6517010695.900231 rank=12
+[SoftImpute] Iter 2: observed MAE=6293827700.279739 rank=11
+[SoftImpute] Iter 3: observed MAE=6179636656.505260 rank=9
+[SoftImpute] Iter 4: observed MAE=6112003355.878187 rank=9
+[SoftImpute] Iter 5: observed MAE=6093028986.893506 rank=8
+[SoftImpute] Iter 6: observed MAE=6057596374.021395 rank=8
+[SoftImpute] Iter 7: observed MAE=6042137937.939461 rank=8
+[SoftImpute] Iter 8: observed MAE=6038686675.340217 rank=8
+[SoftImpute] Iter 9: observed MAE=6042245980.429150 rank=8
+[SoftImpute] Iter 10: observed MAE=6047451345.223906 rank=8
+[SoftImpute] Iter 11: observed MAE=6051641215.030840 rank=8
+[SoftImpute] Iter 12: observed MAE=6054497570.848607 rank=8
+[SoftImpute] Iter 13: observed MAE=6056182979.858984 rank=8
+[SoftImpute] Iter 14: observed MAE=6057049311.698504 rank=8
+[SoftImpute] Iter 15: observed MAE=6057375911.555548 rank=8
+[SoftImpute] Iter 16: observed MAE=6057328933.798151 rank=8
+[SoftImpute] Iter 17: observed MAE=6057051336.772961 rank=8
+[SoftImpute] Iter 18: observed MAE=6056649091.164596 rank=8
+[SoftImpute] Iter 19: observed MAE=6056169936.172359 rank=8
+[SoftImpute] Iter 20: observed MAE=6055681906.999413 rank=8
+[SoftImpute] Iter 21: observed MAE=6055201119.411528 rank=8
+[SoftImpute] Iter 22: observed MAE=6054744393.038710 rank=8
+[SoftImpute] Iter 23: observed MAE=6054321639.923790 rank=8
+[SoftImpute] Iter 24: observed MAE=6053938109.704870 rank=8
+[SoftImpute] Iter 25: observed MAE=6053587752.899929 rank=8
+[SoftImpute] Iter 26: observed MAE=6053262132.896928 rank=8
+[SoftImpute] Iter 27: observed MAE=6052961083.531233 rank=8
+[SoftImpute] Iter 28: observed MAE=6052681143.432382 rank=8
+[SoftImpute] Iter 29: observed MAE=6052421945.522240 rank=8
+[SoftImpute] Iter 30: observed MAE=6052183599.614305 rank=8
+[SoftImpute] Iter 31: observed MAE=6051964243.880062 rank=8
+[SoftImpute] Iter 32: observed MAE=6051762455.581548 rank=8
+[SoftImpute] Iter 33: observed MAE=6051575791.080500 rank=8
+[SoftImpute] Iter 34: observed MAE=6051405724.741452 rank=8
+[SoftImpute] Iter 35: observed MAE=6051249534.503256 rank=8
+[SoftImpute] Iter 36: observed MAE=6051108571.335037 rank=8
+[SoftImpute] Iter 37: observed MAE=6050978418.029334 rank=8
+[SoftImpute] Iter 38: observed MAE=6050861822.941833 rank=8
+[SoftImpute] Iter 39: observed MAE=6050756723.056034 rank=8
+[SoftImpute] Iter 40: observed MAE=6050659384.367078 rank=8
+[SoftImpute] Iter 41: observed MAE=6050572066.647184 rank=8
+[SoftImpute] Iter 42: observed MAE=6050492470.896513 rank=8
+[SoftImpute] Iter 43: observed MAE=6050419035.707763 rank=8
+[SoftImpute] Iter 44: observed MAE=6050351443.292077 rank=8
+[SoftImpute] Iter 45: observed MAE=6050288868.820352 rank=8
+[SoftImpute] Iter 46: observed MAE=6050230601.445036 rank=8
+[SoftImpute] Stopped after iteration 46 for lambda=8996455186925.269531
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Matriz de Correlação da Fertilidade}
+         \PY{n}{df\PYZus{}corr} \PY{o}{=} \PY{n}{df\PYZus{}new\PYZus{}v3}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+         \PY{n}{df\PYZus{}corr}\PY{p}{[}\PY{p}{[}\PY{n}{fertilidade\PYZus{}nome}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{n}{fertilidade\PYZus{}nome}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:}                                                     Fertility rate, total (births per woman)
+         Fertility rate, total (births per woman)                                            1.000000
+         Birth rate, crude (per 1,000 people)                                                0.949686
+         Age dependency ratio, young (\% of working-age p{\ldots}                                  0.852223
+         Population, ages 0-14 (\% of total)                                                  0.845400
+         Age dependency ratio (\% of working-age population)                                  0.737768
+         Urban population growth (annual \%)                                                  0.489621
+         Mortality rate, adult, female (per 1,000 female{\ldots}                                  0.467726
+         Mortality rate, infant (per 1,000 live births)                                      0.466446
+         Mortality rate, under-5 (per 1,000)                                                 0.465638
+         Adolescent fertility rate (births per 1,000 wom{\ldots}                                  0.400526
+         Population, female (\% of total)                                                     0.393750
+         Rural population (\% of total population)                                            0.391737
+         Life expectancy at birth, male (years)                                              0.389749
+         Life expectancy at birth, total (years)                                             0.383373
+         Population growth (annual \%)                                                        0.380989
+         Life expectancy at birth, female (years)                                            0.375188
+         Survival to age 65, female (\% of cohort)                                            0.363533
+         Number of under-five deaths                                                         0.360481
+         Number of infant deaths                                                             0.359097
+         Survival to age 65, male (\% of cohort)                                              0.315776
+         Death rate, crude (per 1,000 people)                                                0.267121
+         Agricultural raw materials imports (\% of mercha{\ldots}                                  0.261226
+         Merchandise imports from developing economies i{\ldots}                                  0.260621
+         Merchandise exports to developing economies in {\ldots}                                  0.252337
+         Mortality rate, adult, male (per 1,000 male adu{\ldots}                                  0.245531
+         Merchandise exports by the reporting economy, r{\ldots}                                  0.244817
+         Merchandise imports by the reporting economy, r{\ldots}                                  0.231759
+         Population, ages 15-64 (\% of total)                                                 0.224319
+         CO2 emissions from manufacturing industries and{\ldots}                                  0.221011
+         CO2 emissions from residential buildings and co{\ldots}                                  0.213546
+         {\ldots}                                                                                      {\ldots}
+         Labor force participation rate, total (\% of tot{\ldots}                                 -0.491713
+         Labor force participation rate, male (\% of male{\ldots}                                 -0.492392
+         Ratio of female to male labor force participati{\ldots}                                 -0.493769
+         Bank capital to assets ratio (\%)                                                   -0.500658
+         Immunization, measles (\% of children ages 12-23{\ldots}                                 -0.501781
+         Labor force, female (\% of total labor force)                                       -0.502054
+         Ease of doing business index (1=most business-f{\ldots}                                 -0.503063
+         Immunization, DPT (\% of children ages 12-23 mon{\ldots}                                 -0.504797
+         Time to resolve insolvency (years)                                                 -0.518458
+         Lifetime risk of maternal death (1 in: rate var{\ldots}                                 -0.542568
+         Improved sanitation facilities, rural (\% of rur{\ldots}                                 -0.601791
+         Improved sanitation facilities (\% of population{\ldots}                                 -0.609923
+         Improved sanitation facilities, urban (\% of urb{\ldots}                                 -0.612721
+         Improved water source, rural (\% of rural popula{\ldots}                                 -0.616532
+         Improved water source (\% of population with acc{\ldots}                                 -0.618691
+         Improved water source, urban (\% of urban popula{\ldots}                                 -0.619488
+         Year                                                                               -0.704792
+         Commitments, IDA (COM, current US\$)                                                      NaN
+         Currency composition of PPG debt, SDR (\%)                                                NaN
+         Debt forgiveness grants (current US\$)                                                    NaN
+         EBRD, private nonguaranteed (NFL, current US\$)                                           NaN
+         IDA grants (current US\$)                                                                 NaN
+         Net financial flows, IDA (NFL, current US\$)                                              NaN
+         Net financial flows, IMF concessional (NFL, cur{\ldots}                                       NaN
+         PPG, IDA (AMT, current US\$)                                                              NaN
+         PPG, IDA (DIS, current US\$)                                                              NaN
+         PPG, IDA (DOD, current US\$)                                                              NaN
+         PPG, IDA (INT, current US\$)                                                              NaN
+         PPG, IDA (NTR, current US\$)                                                              NaN
+         PPG, IDA (TDS, current US\$)                                                              NaN
+         
+         [1286 rows x 1 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Variável de interesse}
+         \PY{n}{var\PYZus{}interesse} \PY{o}{=} \PY{n}{fertilidade\PYZus{}nome}
+         
+         \PY{c+c1}{\PYZsh{} Escopo de treino/test}
+         \PY{n}{colunas} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{df\PYZus{}new\PYZus{}v3}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n}{colunas}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{fertilidade\PYZus{}nome}\PY{p}{)}
+         \PY{n}{feature\PYZus{}names} \PY{o}{=} \PY{n}{colunas}
+         \PY{n}{target\PYZus{}name} \PY{o}{=} \PY{n}{var\PYZus{}interesse}
+         \PY{n}{X} \PY{o}{=} \PY{n}{df\PYZus{}new\PYZus{}v3}\PY{p}{[}\PY{n}{feature\PYZus{}names}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{df\PYZus{}new\PYZus{}v3}\PY{p}{[}\PY{n}{target\PYZus{}name}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Separa dados para treino e teste}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Lista de resultados}
+         \PY{n}{resultados} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{var}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{std}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scores}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{caminho}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Score dos modelos}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{var\PYZus{}interesse}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+         
+         \PY{n}{Y} \PY{o}{=} \PY{n}{df\PYZus{}new\PYZus{}v3}\PY{p}{[}\PY{p}{[}\PY{n}{var\PYZus{}interesse}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{var} \PY{o+ow}{in} \PY{n}{modelos}\PY{p}{:}
+             \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{filename} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../../models/}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{var}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{var}\PY{p}{)}
+                 \PY{n}{clf} \PY{o}{=} \PY{n}{var}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Calcula o score}
+                 \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{df\PYZus{}new\PYZus{}v3}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{error\PYZus{}score}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{raise}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean score: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{scores}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/ Std Score: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{scores}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{resultados}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ok}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{var\PYZus{}interesse}\PY{p}{,}\PY{n}{var}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{scores}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{scores}\PY{p}{)}\PY{p}{,}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{,}\PY{n}{scores}\PY{p}{,}\PY{n}{filename}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Salva modelo            }
+                 \PY{n}{model} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+                 \PY{n}{externals}\PY{o}{.}\PY{n}{joblib}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{model}\PY{p}{,}\PY{n}{filename}\PY{p}{)}
+         
+             \PY{k}{except}\PY{p}{(}\PY{n+ne}{Exception}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZgt{}\PYZgt{} Validar parâmetros.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{resultados}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{erro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{var\PYZus{}interesse}\PY{p}{,}\PY{n}{var}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{,}\PY{k+kc}{None}\PY{p}{,}\PY{k+kc}{None}\PY{p}{,}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{,}\PY{k+kc}{None}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{pass}
+             \PY{k}{finally}\PY{p}{:}            
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+====================================================================================================
+Fertility rate, total (births per woman)
+====================================================================================================
+<class 'sklearn.ensemble.gradient\_boosting.GradientBoostingRegressor'>
+Mean score:  0.9498657118073565 / Std Score:  0.1376871684155691
+----------------------------------------------------------------------------------------------------
+<class 'sklearn.ensemble.bagging.BaggingRegressor'>
+Mean score:  0.958153173047309 / Std Score:  0.11060923252366513
+----------------------------------------------------------------------------------------------------
+<class 'sklearn.ensemble.forest.RandomForestRegressor'>
+Mean score:  0.9426215306778645 / Std Score:  0.1504299415825261
+----------------------------------------------------------------------------------------------------
+<class 'sklearn.ensemble.forest.ExtraTreesRegressor'>
+Mean score:  0.9433292175633525 / Std Score:  0.10748931348624972
+----------------------------------------------------------------------------------------------------
+<class 'sklearn.ensemble.weight\_boosting.AdaBoostRegressor'>
+Mean score:  0.9418747789470107 / Std Score:  0.07399990967872937
+----------------------------------------------------------------------------------------------------
+<class 'sklearn.linear\_model.stochastic\_gradient.SGDRegressor'>
+Mean score:  -2.4123377050424653e+71 / Std Score:  3.273163204464693e+71
+----------------------------------------------------------------------------------------------------
+<class 'sklearn.linear\_model.coordinate\_descent.Lasso'>
+Mean score:  -4051.464182044576 / Std Score:  12075.168106369343
+----------------------------------------------------------------------------------------------------
+<class 'sklearn.linear\_model.ridge.Ridge'>
+Mean score:  -603402718197.5461 / Std Score:  1398275131351.2979
+----------------------------------------------------------------------------------------------------
+<class 'sklearn.linear\_model.coordinate\_descent.ElasticNet'>
+Mean score:  -790.4387726538359 / Std Score:  2298.147954062192
+----------------------------------------------------------------------------------------------------
+<class 'sklearn.linear\_model.base.LinearRegression'>
+Mean score:  -294088734216.0228 / Std Score:  588229160126.1681
+----------------------------------------------------------------------------------------------------
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Salva planilhas com score de modelos}
+         \PY{n}{writer} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{ExcelWriter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../../dist/resultados\PYZus{}modelos.xlsx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{engine}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xlsxwriter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}final} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{resultados}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n}{df\PYZus{}final}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{resultados}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{df\PYZus{}final}\PY{o}{.}\PY{n}{to\PYZus{}excel}\PY{p}{(}\PY{n}{writer}\PY{p}{,} \PY{n}{sheet\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sheet1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{writer}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{df\PYZus{}final}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:}   status                                       var                      model  \textbackslash{}
+         1     ok  Fertility rate, total (births per woman)           BaggingRegressor   
+         0     ok  Fertility rate, total (births per woman)  GradientBoostingRegressor   
+         3     ok  Fertility rate, total (births per woman)        ExtraTreesRegressor   
+         2     ok  Fertility rate, total (births per woman)      RandomForestRegressor   
+         4     ok  Fertility rate, total (births per woman)          AdaBoostRegressor   
+         8     ok  Fertility rate, total (births per woman)                 ElasticNet   
+         6     ok  Fertility rate, total (births per woman)                      Lasso   
+         9     ok  Fertility rate, total (births per woman)           LinearRegression   
+         7     ok  Fertility rate, total (births per woman)                      Ridge   
+         5     ok  Fertility rate, total (births per woman)               SGDRegressor   
+         
+                    mean           std        time  \textbackslash{}
+         1  9.581532e-01  1.106092e-01   50.583918   
+         0  9.498657e-01  1.376872e-01  131.870818   
+         3  9.433292e-01  1.074893e-01   19.065458   
+         2  9.426215e-01  1.504299e-01   47.736675   
+         4  9.418748e-01  7.399991e-02  114.062698   
+         8 -7.904388e+02  2.298148e+03   14.034799   
+         6 -4.051464e+03  1.207517e+04   11.567414   
+         9 -2.940887e+11  5.882292e+11    8.799115   
+         7 -6.034027e+11  1.398275e+12   11.631908   
+         5 -2.412338e+71  3.273163e+71    0.342238   
+         
+                                                       scores  \textbackslash{}
+         1  [0.9638536535659511, 0.9975196663418858, 0.998{\ldots}   
+         0  [0.9668257313948193, 0.9982827521245184, 0.998{\ldots}   
+         3  [0.8734091736600261, 0.9831857764887317, 0.990{\ldots}   
+         2  [0.9450056586169125, 0.9971917988056322, 0.996{\ldots}   
+         4  [0.932219056841623, 0.98965140411541, 0.982667{\ldots}   
+         8  [0.06096002684390356, 0.4556464086168164, 0.62{\ldots}   
+         6  [-0.2230657803450975, 0.2322276941487278, 0.46{\ldots}   
+         9  [0.6980346972624497, 0.7569493032095755, -1736{\ldots}   
+         7  [0.4480556037313639, 0.6063387959622368, -2486{\ldots}   
+         5  [-9.748696307358854e+69, -1.1831318055192161e+{\ldots}   
+         
+                                                 caminho  
+         1           ../../models/BaggingRegressor.model  
+         0  ../../models/GradientBoostingRegressor.model  
+         3        ../../models/ExtraTreesRegressor.model  
+         2      ../../models/RandomForestRegressor.model  
+         4          ../../models/AdaBoostRegressor.model  
+         8                 ../../models/ElasticNet.model  
+         6                      ../../models/Lasso.model  
+         9           ../../models/LinearRegression.model  
+         7                      ../../models/Ridge.model  
+         5               ../../models/SGDRegressor.model  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Carrega melhor modelo}
+         \PY{n}{model} \PY{o}{=} \PY{n}{externals}\PY{o}{.}\PY{n}{joblib}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{df\PYZus{}final}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{caminho}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Acurácia do modelo de regressão}
+         \PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} 0.9454037921403707
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Preparando modelo Lime}
+         \PY{n}{explainer} \PY{o}{=} \PY{n}{lime}\PY{o}{.}\PY{n}{lime\PYZus{}tabular}\PY{o}{.}\PY{n}{LimeTabularExplainer}\PY{p}{(}
+             \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+             \PY{n}{feature\PYZus{}names}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{,} 
+             \PY{n}{class\PYZus{}names}\PY{o}{=}\PY{p}{[}\PY{n}{var\PYZus{}interesse}\PY{p}{]}\PY{p}{,}
+             \PY{n}{verbose}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} 
+             \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{regression}\PY{l+s+s1}{\PYZsq{}}
+         \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Define seed para modelo}
+         \PY{k}{def} \PY{n+nf}{explain}\PY{p}{(}\PY{n}{instance}\PY{p}{,} \PY{n}{predict\PYZus{}fn}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+           \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}
+           \PY{k}{return} \PY{n}{explainer}\PY{o}{.}\PY{n}{explain\PYZus{}instance}\PY{p}{(}\PY{n}{instance}\PY{p}{,} \PY{n}{predict\PYZus{}fn}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Modelo de predição para teste}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{302}
+         \PY{n}{exp} \PY{o}{=} \PY{n}{explain}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{,} \PY{n}{num\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Intercept 1.6969907389449366
+Prediction\_local [1.98394275]
+Right: 1.9475947385082149
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Resultados para 5 features}
+         \PY{n}{exp}\PY{o}{.}\PY{n}{show\PYZus{}in\PYZus{}notebook}\PY{p}{(}\PY{n}{show\PYZus{}table}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Detalhe por variável}
+         \PY{n}{exp}\PY{o}{.}\PY{n}{as\PYZus{}list}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} [('12.70 < Birth rate, crude (per 1,000 people) <= 15.90',
+           0.14414684780518253),
+          ('Age dependency ratio (\% of working-age population) > 54.32',
+           0.09886783941658628),
+          ('0.05 < Electricity production from hydroelectric sources (\% of total) <= 3.08',
+           -0.05685114334039232),
+          ('Mortality rate, under-5 (per 1,000) > 19.50', 0.05159677806094871),
+          ('0.04 < Health expenditure, public (\% of government expenditure) <= 1.48',
+           0.04919169186857802)]
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
